@@ -17,7 +17,6 @@ public class Character {
     String _skillProfs;
     String _expertSkills;
     String _toolProfs;
-    String ignore;
 
     public Character(){
 
