@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.GridLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:grid="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+
+    android:id="@+id/choice_grid"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:layout_centerHorizontal="true"
+    android:padding="4dp"
+    tools:context="com.example.harv0kz.dd5ediceroller.activity.DiceRollingMain"
+
+    grid:layout_behavior="@string/appbar_scrolling_view_behavior"
+    grid:alignmentMode="alignBounds"
+    grid:columnCount="3"
+    grid:rowCount="4"
+    grid:rowOrderPreserved="false"
+    grid:useDefaultMargins="true">
+
+    <Spinner
+        android:id="@+id/characterList"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:gravity="center"
+        grid:layout_columnWeight="1"
+        grid:layout_row="0"
+        grid:layout_column="0"
+        grid:layout_columnSpan="2"
+        grid:layout_gravity="fill_horizontal"/>
+
+    <TextView
+        android:id="@+id/characterName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:gravity="center"
+        android:text="Darrian Swiften"
+        android:textColor="@android:color/black"
+        grid:layout_columnWeight="1"
+        grid:layout_row="1"
+        grid:layout_column="0"
+        grid:layout_columnSpan="2"
+        grid:layout_gravity="fill_horizontal" />
+
+    <TextView
+        android:id="@+id/characterLevel"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:gravity="center"
+        android:text="Level 5"
+        android:textColor="@android:color/black"
+        grid:layout_columnWeight="1"
+        grid:layout_row="1"
+        grid:layout_column="2"
+        grid:layout_columnSpan="1"
+        grid:layout_gravity="fill_horizontal" />
+
+    <TextView
+        android:id="@+id/characterStrength"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:gravity="center"
+        android:text="STR: 16 (+3)"
+        android:textColor="@android:color/black"
+        grid:layout_columnWeight="1"
+        grid:layout_row="2"
+        grid:layout_column="0"
+        grid:layout_columnSpan="1"
+        grid:layout_gravity="fill_horizontal" />
+
+    <TextView
+        android:id="@+id/characterDexterity"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:gravity="center"
+        android:text="DEX: 16 (+3)"
+        android:textColor="@android:color/black"
+        grid:layout_columnWeight="1"
+        grid:layout_row="2"
+        grid:layout_column="1"
+        grid:layout_columnSpan="1"
+        grid:layout_gravity="fill_horizontal" />
+
+    <TextView
+        android:id="@+id/characterConstitution"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:gravity="center"
+        android:text="CON: 16 (+3)"
+        android:textColor="@android:color/black"
+        grid:layout_columnWeight="1"
+        grid:layout_row="2"
+        grid:layout_column="2"
+        grid:layout_columnSpan="1"
+        grid:layout_gravity="fill_horizontal" />
+
+    <TextView
+        android:id="@+id/characterIntelligence"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="INT: 16 (+3)"
+        android:textColor="@android:color/black"
+        android:textSize="16sp"
+        grid:layout_column="0"
+        grid:layout_columnSpan="1"
+        grid:layout_columnWeight="1"
+        grid:layout_gravity="fill_horizontal"
+        grid:layout_row="3" />
+
+    <TextView
+        android:id="@+id/characterWisdom"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="WIS: 16 (+3)"
+        android:textColor="@android:color/black"
+        android:textSize="16sp"
+        grid:layout_column="1"
+        grid:layout_columnSpan="1"
+        grid:layout_columnWeight="1"
+        grid:layout_gravity="fill_horizontal"
+        grid:layout_row="3" />
+
+    <TextView
+        android:id="@+id/characterCharisma"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:gravity="center"
+        android:text="CHA: 16 (+3)"
+        android:textColor="@android:color/black"
+        grid:layout_columnWeight="1"
+        grid:layout_row="3"
+        grid:layout_column="2"
+        grid:layout_columnSpan="1"
+        grid:layout_gravity="fill_horizontal" />
+
+
+</android.support.v7.widget.GridLayout>

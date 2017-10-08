@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.GridLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:grid="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+
+    android:id="@+id/choice_grid"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:layout_centerHorizontal="true"
+    android:padding="4dp"
+    tools:showIn="@layout/app_bar_dice_rolling_page"
+    tools:context="com.example.harv0kz.dd5ediceroller.activity.DiceRollingMain"
+
+    grid:layout_behavior="@string/appbar_scrolling_view_behavior"
+    grid:alignmentMode="alignBounds"
+    grid:columnCount="2"
+    grid:rowCount="5"
+    grid:rowOrderPreserved="false"
+    grid:useDefaultMargins="true">
+
+    <Spinner
+        android:id="@+id/flatStatRoll"
+        android:layout_width="0dp"
+        android:layout_height="75dp"
+        android:gravity="center"
+        grid:layout_columnWeight="1"
+        grid:layout_row="0"
+        grid:layout_column="0"
+        grid:layout_gravity="fill_horizontal"/>
+
+    <Spinner
+        android:id="@+id/savingThrowRoll"
+        android:layout_width="0dp"
+        android:layout_height="75dp"
+        android:gravity="center"
+        grid:layout_columnWeight="1"
+        grid:layout_row="2"
+        grid:layout_column="0"
+        grid:layout_gravity="fill_horizontal"/>
+
+    <Spinner
+        android:id="@+id/skillRoll"
+        android:layout_width="0dp"
+        android:layout_height="75dp"
+        android:gravity="center"
+        grid:layout_columnWeight="1"
+        grid:layout_row="1"
+        grid:layout_column="0"
+        grid:layout_gravity="fill_horizontal"/>
+
+    <Button
+        android:id="@+id/flatRollButton"
+        android:layout_width="0dp"
+        android:layout_height="75dp"
+        android:gravity="center"
+        android:text="@string/flatStatRoll"
+        grid:layout_column="1"
+        grid:layout_columnWeight="1"
+        grid:layout_gravity="fill_horizontal"
+        grid:layout_row="0" />
+
+    <Button
+        android:id="@+id/savingThrowButton"
+        android:layout_width="0dp"
+        android:layout_height="75dp"
+        android:gravity="center"
+        android:text="Saving Throw"
+        grid:layout_column="1"
+        grid:layout_columnWeight="1"
+        grid:layout_gravity="fill_horizontal"
+        grid:layout_row="2" />
+
+    <Button
+        android:id="@+id/skillRollButton"
+        android:layout_width="0dp"
+        android:layout_height="75dp"
+        android:gravity="center"
+        android:text="@string/skillRoll"
+        grid:layout_column="1"
+        grid:layout_columnWeight="1"
+        grid:layout_gravity="fill_horizontal"
+        grid:layout_row="1" />
+
+    <RadioGroup
+        android:id="@+id/advDisadvApplier"
+        android:layout_width="0dp"
+        android:layout_height="75dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        grid:layout_columnSpan="2"
+        grid:layout_column="0"
+        grid:layout_columnWeight="1"
+        grid:layout_gravity="fill_horizontal"
+        grid:layout_row="3">
+
+        <RadioButton
+            android:id="@+id/applyNone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="None" />
+
+        <RadioButton
+            android:id="@+id/applyAdv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Advantage" />
+
+        <RadioButton
+            android:id="@+id/applyDisAdv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Disadvantage" />
+    </RadioGroup>
+
+    <TextView
+        android:id="@+id/showRoll"
+        android:layout_width="0dp"
+        android:layout_height="75dp"
+        android:background="@drawable/back"
+        android:gravity="center"
+        android:text="@string/flatStatView"
+        android:textColor="@android:color/black"
+        android:textSize="20sp"
+        grid:layout_columnSpan="2"
+        grid:layout_column="0"
+        grid:layout_columnWeight="1"
+        grid:layout_gravity="fill_horizontal"
+        grid:layout_row="4" />
+
+
+</android.support.v7.widget.GridLayout>

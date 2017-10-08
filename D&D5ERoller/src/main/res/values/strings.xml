@@ -1,0 +1,25 @@
+<resources>
+    <string name="app_name">D&amp;D 5E dice roller</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <!-->Buttons<-->
+    <string name="flatStatRoll">Flat Roll</string>
+    <string name="skillRoll">Skill Roll</string>
+
+    <string name="flatStatView"></string>
+    <string name="skillRollView"></string>
+
+    <string-array name="nav_item_activity_titles">
+        <item>Dice roller</item>
+        <item>Characters</item>
+        <item>Custom mods</item>
+        <item>Logging</item>
+    </string-array>
+
+    <string name="action_settings">Settings</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>
