@@ -14,7 +14,7 @@
     grid:layout_behavior="@string/appbar_scrolling_view_behavior"
     grid:alignmentMode="alignBounds"
     grid:columnCount="3"
-    grid:rowCount="4"
+    grid:rowCount="5"
     grid:rowOrderPreserved="false"
     grid:useDefaultMargins="true">
 
@@ -140,6 +140,18 @@
         grid:layout_column="2"
         grid:layout_columnSpan="1"
         grid:layout_gravity="fill_horizontal" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/floatingAddCharacterButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        grid:layout_column="2"
+        grid:layout_row="4"
+        grid:layout_gravity="fill_horizontal"
+        grid:fabSize="mini"
+        grid:layout_columnSpan="1"
+        grid:srcCompat="@android:drawable/ic_input_add" />
 
 
 </android.support.v7.widget.GridLayout>

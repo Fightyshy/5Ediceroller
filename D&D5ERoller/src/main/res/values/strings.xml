@@ -5,7 +5,7 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <!-->Buttons<-->
-    <string name="flatStatRoll">Flat Roll</string>
+    <string name="flatStatRoll">Flat 1D20 Roll</string>
     <string name="skillRoll">Skill Roll</string>
 
     <string name="flatStatView"></string>
@@ -22,4 +22,5 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_character_sheet">CharacterSheet</string>
 </resources>

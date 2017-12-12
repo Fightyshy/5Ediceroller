@@ -45,8 +45,13 @@ public class DiceRollingMain extends AppCompatActivity
     public static String CURRENT_TAG = TAG_DICEROLLER;
 
     private String[] activityTitles;
-    private boolean shouldLoadOnBackPress = true;
+//    private boolean shouldLoadOnBackPress = true;
     private Handler mHandler;
+
+    private DiceRollingFragment diceRollingFragment;
+    private CharacterFragment characterFragment;
+    private CustomModFragment customModFragment;
+    private LoggingFragment loggingFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -103,16 +108,24 @@ public class DiceRollingMain extends AppCompatActivity
     private Fragment getHomeFragment(){
         switch(navItemIndex){
             case 0:
-                DiceRollingFragment diceRollingFragment = new DiceRollingFragment();
+                if (diceRollingFragment == null) {
+                    diceRollingFragment = new DiceRollingFragment();
+                }
                 return diceRollingFragment;
             case 1:
-                CharacterFragment characterFragment = new CharacterFragment();
+                if(characterFragment == null) {
+                    characterFragment = new CharacterFragment();
+                }
                 return characterFragment;
             case 2:
-                CustomModFragment customModFragment = new CustomModFragment();
+                if(customModFragment == null) {
+                    customModFragment = new CustomModFragment();
+                }
                 return customModFragment;
             case 3:
-                LoggingFragment loggingFragment = new LoggingFragment();
+                if(loggingFragment == null) {
+                    loggingFragment = new LoggingFragment();
+                }
                 return loggingFragment;
             default:
                 return new DiceRollingFragment();

@@ -7,32 +7,21 @@ package com.example.harv0kz.dd5ediceroller;
 public class Character {
     int _id;
     String _name;
-    int _level;
-    int _strength;
-    int _dexterity;
-    int _constitution;
-    int _intelligence;
-    int _wisdom;
-    int _charisma;
-    String _skillProfs;
-    String _expertSkills;
-    String _toolProfs;
-    String ignore;
+    int _maxProfBonus;
+    int[] _statline;
+    String[] _skillProfs;
+    String[] _expertSkills;
+    String[] _toolProfs;
 
     public Character(){
 
     }
 
-    public Character(int id, String name, int level, int strength, int dexterity, int constitution, int intelligence, int wisdom, int charisma, String skillProfs, String expertSkills, String toolProfs){
+    public Character(int id, String name, int maxProfBonus, int[] statline, String[] skillProfs, String[] expertSkills, String[] toolProfs){
         this._id = id;
         this._name = name;
-        this._level = level;
-        this._strength = strength;
-        this._dexterity = dexterity;
-        this._constitution = constitution;
-        this._intelligence = intelligence;
-        this._wisdom = wisdom;
-        this._charisma = charisma;
+        this._maxProfBonus = maxProfBonus;
+        this._statline = statline;
         this._skillProfs = skillProfs;
         this._expertSkills = expertSkills;
         this._toolProfs = toolProfs;
@@ -46,43 +35,23 @@ public class Character {
         this._name = name;
     }
 
-    public void set_level(int level) {
-        this._level = level;
+    public void set_maxProfBonus(int maxProfBonus) {
+        this._maxProfBonus = maxProfBonus;
     }
 
-    public void set_strength(int strength) {
-        this._strength = strength;
+    public void set_statline(int[] statline){
+        this._statline = statline;
     }
 
-    public void set_dexterity(int dexterity) {
-        this._dexterity = dexterity;
-    }
-
-    public void set_constitution(int constitution) {
-        this._constitution = constitution;
-    }
-
-    public void set_intelligence(int intelligence) {
-        this._intelligence = intelligence;
-    }
-
-    public void set_wisdom(int wisdom) {
-        this._wisdom = wisdom;
-    }
-
-    public void set_charisma(int charisma) {
-        this._charisma = charisma;
-    }
-
-    public void set_skillProfs(String skillProfs) {
+    public void set_skillProfs(String[] skillProfs) {
         this._skillProfs = skillProfs;
     }
 
-    public void set_expertSkills(String expertSkills) {
+    public void set_expertSkills(String[] expertSkills) {
         this._expertSkills = expertSkills;
     }
 
-    public void set_toolProfs(String toolProfs) {
+    public void set_toolProfs(String[] toolProfs) {
         this._toolProfs = toolProfs;
     }
 
@@ -94,43 +63,23 @@ public class Character {
         return _name;
     }
 
-    public int get_level() {
-        return _level;
+    public int get_maxProfBonus() {
+        return _maxProfBonus;
     }
 
-    public int get_strength() {
-        return _strength;
+    public int[] get_statline(){
+        return _statline;
     }
 
-    public int get_dexterity() {
-        return _dexterity;
-    }
-
-    public int get_constitution() {
-        return _constitution;
-    }
-
-    public int get_intelligence() {
-        return _intelligence;
-    }
-
-    public int get_wisdom() {
-        return _wisdom;
-    }
-
-    public int get_charisma() {
-        return _charisma;
-    }
-
-    public String get_skillProfs() {
+    public String[] get_skillProfs() {
         return _skillProfs;
     }
 
-    public String get_expertSkills() {
+    public String[] get_expertSkills() {
         return _expertSkills;
     }
 
-    public String get_toolProfs() {
+    public String[] get_toolProfs() {
         return _toolProfs;
     }
 }

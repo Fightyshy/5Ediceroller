@@ -1,14 +1,18 @@
 package com.example.harv0kz.dd5ediceroller.fragments;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.harv0kz.dd5ediceroller.R;
+import com.example.harv0kz.dd5ediceroller.activity.CharacterSheet;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -65,7 +69,8 @@ public class CharacterFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_character, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_character, container, false);
+        return rootView;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -73,6 +78,19 @@ public class CharacterFragment extends Fragment {
         if (mListener != null) {
             mListener.onFragmentInteraction(uri);
         }
+    }
+
+    public void onViewCreated(final View rootView, Bundle savedInstanceState){
+        super.onViewCreated(rootView, savedInstanceState);
+        final View v = rootView;
+        FloatingActionButton fab = (FloatingActionButton) getView().findViewById(R.id.floatingAddCharacterButton);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent openNewSheet = new Intent(getActivity(), CharacterSheet.class);
+                startActivity(openNewSheet);
+            }
+        });
     }
 
 //    @Override

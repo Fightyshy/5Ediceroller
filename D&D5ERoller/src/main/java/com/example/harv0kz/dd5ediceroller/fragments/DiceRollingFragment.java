@@ -1,16 +1,25 @@
 package com.example.harv0kz.dd5ediceroller.fragments;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
+import android.support.annotation.IdRes;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.math.MathUtils;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.style.ForegroundColorSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -18,8 +27,13 @@ import android.widget.Toast;
 import com.example.harv0kz.dd5ediceroller.R;
 import com.example.harv0kz.dd5ediceroller.activity.DiceRollingMain;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 import java.util.List;
+
+import static java.lang.Integer.min;
+import static java.lang.Math.max;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -29,12 +43,17 @@ import java.util.List;
  * Use the {@link DiceRollingFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class DiceRollingFragment extends Fragment {
+public final class DiceRollingFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
     private RNG diceRoller = new RNG();
+    private String textNumbers;
+    private String textNumbersID = "textNumbers";
+
+    private TextView viewRoll;
+    private Bundle savedState = null;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -71,7 +90,6 @@ public class DiceRollingFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
-
     }
 
     @Override
@@ -79,7 +97,40 @@ public class DiceRollingFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_dice_rolling, container, false);
+
+        viewRoll = (TextView) rootView.findViewById(R.id.showRoll);
+
+        if(savedInstanceState != null && savedState == null) {
+            savedState = savedInstanceState.getBundle("ViewRoll");
+        }
+        if(savedState != null) {
+            viewRoll.setText(savedState.getCharSequence("ViewRoll"));
+        }
+        savedState = null;
+
         return rootView;
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        savedState = saveState(); /* vstup defined here for sure */
+        viewRoll = null;
+    }
+
+    private Bundle saveState() { /* called either from onDestroyView() or onSaveInstanceState() */
+        Bundle state = new Bundle();
+        state.putCharSequence("ViewRoll", viewRoll.getText());
+        return state;
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        /* If onDestroyView() is called first, we can use the previously savedState but we can't call saveState() anymore */
+        /* If onSaveInstanceState() is called first, we don't have savedState, so we need to call saveState() */
+        /* => (?:) operator inevitable! */
+        outState.putBundle("ViewRoll", (savedState != null) ? savedState : saveState());
     }
 
     @Override
@@ -87,21 +138,11 @@ public class DiceRollingFragment extends Fragment {
         super.onViewCreated(rootView, savedInstanceState);
         final View v = rootView;
         //Rest of the view
-        Spinner flatRollSpinner = (Spinner) rootView.findViewById(R.id.flatStatRoll);
+
+        RadioGroup advDisRadioGroup = (RadioGroup) getView().findViewById(R.id.advDisadvApplier);
+        RadioButton noneRadio = (RadioButton) getView().findViewById(R.id.applyNone);
+        noneRadio.setChecked(true);
         String[] statArray= {"Strength","Dexterity","Constitution","Intelligence","Wisdom","Charisma"};
-        ArrayAdapter<String> flatRollItems = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, statArray);
-        flatRollItems.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        flatRollSpinner.setAdapter(flatRollItems);
-        flatRollSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(){
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id){
-                //Really for correct logging
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
 
         Spinner skillRollSpinner = (Spinner) rootView.findViewById(R.id.skillRoll);
         //18 skills 0 index 17max
@@ -138,101 +179,94 @@ public class DiceRollingFragment extends Fragment {
         Button flatRollButton = (Button) getView().findViewById(R.id.flatRollButton);
         flatRollButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v){
-                TextView viewRoll = (TextView) getView().findViewById(R.id.showRoll);
-                int result = randomNumber(1,20);
-                viewRoll.setText(Integer.toString(result));
+                viewRoll.setText("");
+                for(Spannable span:d20Rolls()){
+                    viewRoll.append(span);
+                }
             }
         });
 
         Button skillRollButton = (Button) getView().findViewById(R.id.skillRollButton);
         skillRollButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v){
-                TextView viewRoll = (TextView) getView().findViewById(R.id.showRoll);
-                int result = randomNumber(1,20);
-                viewRoll.setText(Integer.toString(result));
+                viewRoll.setText("");
+                for(Spannable span:d20Rolls()){
+                    viewRoll.append(span);
+                }
             }
         });
 
         Button savingThrowButton = (Button) getView().findViewById(R.id.savingThrowButton);
         savingThrowButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v){
-                TextView viewRoll = (TextView) getView().findViewById(R.id.showRoll);
-                int result = randomNumber(1,20);
-                viewRoll.setText(Integer.toString(result));
+                viewRoll.setText("");
+                for(Spannable span:d20Rolls()){
+                    viewRoll.append(span);
+                }
             }
         });
 
     }
 
-    public int randomNumber(int numberDice, int diceSides){
-        int result = 0;
-        List<Integer> diceRolled = new ArrayList<Integer>();
+    public List<Spannable> d20Rolls (){
+        List<Spannable> roller = new ArrayList<Spannable>();
+        int rollOne = diceRoller.randomNumber(1,20);
+        int rollTwo = diceRoller.randomNumber(1,20);
+        int higher = max(rollOne,rollTwo);
+        int lower = min(rollOne,rollTwo);
+        Spannable firstRoll;
+        Spannable secondRoll;
+        Spannable comma = new SpannableString(", ");
 
-        if(numberDice < 1){
-            numberDice = 1;
+        if(rollOne == rollTwo){
+            higher = max(diceRoller.randomNumber(1,20),diceRoller.randomNumber(1,20));
+            lower = min(diceRoller.randomNumber(1,20),diceRoller.randomNumber(1,20));
         }
 
-        switch(diceSides){
-            case 4:
-                for(int i = 0; i < numberDice; i++){
-                    int oneRoll = diceRoller.rollD4();
-                    diceRolled.add(oneRoll);
-                }
-                for (int j : diceRolled){
-                    result += j;
-                }
-                break;
-            case 6:
-                for(int i = 0; i < numberDice; i++){
-                    int oneRoll = diceRoller.rollD6();
-                    diceRolled.add(oneRoll);
-                }
-                for (int j : diceRolled){
-                    result += j;
-                }
-                break;
-            case 8:
-                for(int i = 0; i < numberDice; i++){
-                    int oneRoll = diceRoller.rollD8();
-                    diceRolled.add(oneRoll);
-                }
-                for (int j : diceRolled){
-                    result += j;
-                }
-                break;
-            case 10:
-                for(int i = 0; i < numberDice; i++){
-                    int oneRoll = diceRoller.rollD10();
-                    diceRolled.add(oneRoll);
-                }
-                for (int j : diceRolled){
-                    result += j;
-                }
-                break;
-            case 12:
-                for(int i = 0; i < numberDice; i++){
-                    int oneRoll = diceRoller.rollD12();
-                    diceRolled.add(oneRoll);
-                }
-                for (int j : diceRolled){
-                    result += j;
-                }
-                break;
-            case 20:
-                for(int i = 0; i < numberDice; i++){
-                    int oneRoll = diceRoller.rollD4();
-                    diceRolled.add(oneRoll);
-                }
-                for (int j : diceRolled){
-                    result += j;
-                }
-                break;
-            default:
-                result = 1;
-                break;
+        if(advDisGroupListener().equals("Advantage")){
+            firstRoll = new SpannableString(critParser(higher));
+            secondRoll = new SpannableString(critParser(lower));
+            secondRoll.setSpan(new ForegroundColorSpan(Color.GRAY),0,secondRoll.length(),Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+            roller.add(firstRoll);
+            roller.add(comma);
+            roller.add(secondRoll);
+            return roller;
         }
+        else if(advDisGroupListener().equals("Disadvantage")){
+            firstRoll = new SpannableString(critParser(lower));
+            secondRoll = new SpannableString(critParser(higher));
+            secondRoll.setSpan(new ForegroundColorSpan(Color.GRAY),0,secondRoll.length(),Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+            roller.add(firstRoll);
+            roller.add(comma);
+            roller.add(secondRoll);
+            return roller;
+        }
+        else{
+            firstRoll = new SpannableString(critParser(rollOne));
+            roller.add(firstRoll);
+            return roller;
+        }
+    }
 
-        return result;
+    public String critParser(int result){
+        String roll = "";
+        if(result==1){
+            roll = "Natural 1 (Auto fail)";
+        }
+        else if(result==20){
+            roll = "Natural 20 (Crit)";
+        }
+        else {
+            roll = String.valueOf(result);
+        }
+        return roll;
+    }
+
+    public String advDisGroupListener(){
+        RadioGroup advDisRadioGroup = (RadioGroup) getView().findViewById(R.id.advDisadvApplier);
+        int selectedButtonId = advDisRadioGroup.getCheckedRadioButtonId();
+        RadioButton selectedButton = (RadioButton) advDisRadioGroup.findViewById(selectedButtonId);
+        return (String) selectedButton.getText();
     }
 
     // TODO: Rename method, update argument and hook method into UI event

@@ -19,16 +19,6 @@
     grid:useDefaultMargins="true">
 
     <Spinner
-        android:id="@+id/flatStatRoll"
-        android:layout_width="0dp"
-        android:layout_height="75dp"
-        android:gravity="center"
-        grid:layout_columnWeight="1"
-        grid:layout_row="0"
-        grid:layout_column="0"
-        grid:layout_gravity="fill_horizontal"/>
-
-    <Spinner
         android:id="@+id/savingThrowRoll"
         android:layout_width="0dp"
         android:layout_height="75dp"
@@ -54,8 +44,9 @@
         android:layout_height="75dp"
         android:gravity="center"
         android:text="@string/flatStatRoll"
-        grid:layout_column="1"
+        grid:layout_column="0"
         grid:layout_columnWeight="1"
+        grid:layout_columnSpan="2"
         grid:layout_gravity="fill_horizontal"
         grid:layout_row="0" />
 

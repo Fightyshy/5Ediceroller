@@ -1,6 +1,8 @@
 package com.example.harv0kz.dd5ediceroller.fragments;
 
 import java.security.SecureRandom;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 /**
@@ -44,5 +46,93 @@ public class RNG {
     public int rollD20(){
         Random newD20Dice = new SecureRandom();
         return newD20Dice.nextInt(d20Max-masterMin+1)+masterMin;
+    }
+
+    public int randomNumber(int numberDice, int diceSides){
+        int result = 0;
+        List<Integer> diceRolled = new ArrayList<Integer>(); //Eg. 5d6 d6 is rolled separately 5 times, then summed, also logging
+
+        if(numberDice < 1){
+            numberDice = 1;
+        }
+
+        switch(diceSides){
+            case 4:
+                for(int i = 0; i < numberDice; i++){
+                    int oneRoll = rollD4();
+                    diceRolled.add(oneRoll);
+                }
+                for (int j : diceRolled){
+                    result += j;
+                }
+                break;
+            case 6:
+                for(int i = 0; i < numberDice; i++){
+                    int oneRoll = rollD6();
+                    diceRolled.add(oneRoll);
+                }
+                for (int j : diceRolled){
+                    result += j;
+                }
+                break;
+            case 8:
+                for(int i = 0; i < numberDice; i++){
+                    int oneRoll = rollD8();
+                    diceRolled.add(oneRoll);
+                }
+                for (int j : diceRolled){
+                    result += j;
+                }
+                break;
+            case 10:
+                for(int i = 0; i < numberDice; i++){
+                    int oneRoll = rollD10();
+                    diceRolled.add(oneRoll);
+                }
+                for (int j : diceRolled){
+                    result += j;
+                }
+                break;
+            case 12:
+                for(int i = 0; i < numberDice; i++){
+                    int oneRoll = rollD12();
+                    diceRolled.add(oneRoll);
+                }
+                for (int j : diceRolled){
+                    result += j;
+                }
+                break;
+            case 20:
+                for(int i = 0; i < numberDice; i++){
+                    int oneRoll = rollD20();
+                    diceRolled.add(oneRoll);
+                }
+                for (int j : diceRolled){
+                    result += j;
+                }
+                break;
+            case 100:
+                for(int i = 0; i < numberDice; i++){
+                    int bothRolls = Integer.parseInt(rollD10()+""+rollD10());
+                    diceRolled.add(bothRolls);
+                }
+                for (int j : diceRolled){
+                    result += j;
+                }
+                break;
+            case 66:
+                for(int i = 0; i < numberDice; i++){
+                    int bothRolls = Integer.parseInt(rollD6()+""+rollD6());
+                    diceRolled.add(bothRolls);
+                }
+                for (int j : diceRolled){
+                    result += j;
+                }
+                break;
+            default:
+                result = 1;
+                break;
+        }
+        return result;
     }
 }
